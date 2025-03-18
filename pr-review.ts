@@ -1,5 +1,6 @@
-import axios from "axios";
-import fs from "fs";
+const axios = require("axios");
+const fs = require("fs");
+
 
 // Define types for ESLint issue categories
 type IssueCategories = {

@@ -1,5 +1,9 @@
 const axios = require("axios");
 const fs = require("fs");
+require('dotenv').config();
+
+
+
 
 
 // Define types for ESLint issue categories
@@ -52,8 +56,8 @@ Detected categories:
     const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
-            model: "gpt-4",
-            messages: [{ role: "user", content: prompt }],
+            model: "gpt-4o",
+            messages: [{ "role": "user", "content": prompt }],
         },
         {
             headers: {

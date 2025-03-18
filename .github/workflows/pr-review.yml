@@ -1,0 +1,38 @@
+name: AI Next.js TypeScript PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run ESLint for TypeScript analysis
+        run: pnpm eslint . | tee eslint-report.txt
+
+      - name: Run AI Reviewer for Next.js TypeScript
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: pnpm ts-node pr-review.ts
+
+      - name: Post AI feedback as PR comment
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: ai-nextjs-review-feedback.txt
+
+      - name: Block PR on SEO issues
+        if: failure()
+        run: exit 1

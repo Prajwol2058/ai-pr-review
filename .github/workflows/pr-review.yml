@@ -2,8 +2,7 @@ name: AI PR Review
 
 on:
   pull_request:
-    branches:
-      - main
+    types: [opened, synchronize, reopened]
 
 jobs:
   review:
@@ -21,8 +20,11 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      - name: install dotenv
+        run: pnpm add dotenv
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Run ESLint
         run: pnpm eslint . | tee eslint-report.txt
@@ -31,7 +33,7 @@ jobs:
         run: pnpm ts-node pr-review.ts
 
       - name: Upload AI Review Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ai-review
           path: ai-nextjs-review-feedback.txt

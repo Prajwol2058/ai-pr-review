@@ -1,4 +1,4 @@
-name: AI PR Reviewer
+name: AI PR Review
 
 on:
   pull_request:
@@ -30,7 +30,7 @@ jobs:
         run: pnpm ts-node pr-review.ts
 
       - name: Upload AI Review Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ai-review
           path: ai-nextjs-review-feedback.txt

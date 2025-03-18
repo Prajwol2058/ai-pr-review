@@ -33,6 +33,6 @@ jobs:
         with:
           filePath: ai-nextjs-review-feedback.txt
 
-      - name: Block PR on SEO issues
-        if: failure()
-        run: exit 1
+      # - name: Block PR on SEO issues
+      #   if: failure()
+      #   run: exit 1

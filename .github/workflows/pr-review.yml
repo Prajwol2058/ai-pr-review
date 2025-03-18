@@ -20,6 +20,9 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      - name: install dotenv
+        run: pnpm add dotenv
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 

@@ -28,7 +28,8 @@ jobs:
         run: pnpm eslint . | tee eslint-report.txt
 
       - name: Run AI PR Review Script
-        run: pnpm ts-node pr-review.ts
+        run: pnpm exec tsx pr-review.ts
+        # pnpm ts-node pr-review.ts
 
       - name: Upload AI Review Report
         uses: actions/upload-artifact@v3
